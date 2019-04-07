@@ -1,0 +1,27 @@
+<% include partials/header %>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-10 col-xl-9 mx-auto">
+        <div class="card card-signin flex-row my-5">
+          <div class="card-img-left d-none d-md-flex">
+          </div>
+          <div class="card-body">
+            <h5 class="card-title text-center">LogIn</h5>
+            <form class="form-signin" action="/login" method="POST">
+              <div class="form-label-group">
+                  <label for="inputUserame">Username</label>
+                <input type="text" id="inputUserame" class="form-control" name="username" placeholder="Username" required autofocus>               
+              </div>
+              <div class="form-label-group mb-4">
+                <label for="inputPassword">Password</label>
+                <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>         
+              </div>
+              <button class="btn btn-primary btn-block" type="submit">LogIn</button>
+              <a class="btn btn-danger d-block text-center mt-2 small" href="/register">SignUp</a>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% include partials/footer %>

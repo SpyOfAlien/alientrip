@@ -1,0 +1,76 @@
+<% include ../partials/header %>
+
+<div id="banner" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+          <li data-target="#banner" data-slide-to="0" class="active"></li>
+          <li data-target="#banner" data-slide-to="1"></li>
+          <li data-target="#banner" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner" role="listbox">
+          <div class="carousel-item active" style="background-image: url('imgs/anivia.jpg')">
+          </div>
+          <div class="carousel-item" style="background-image: url('imgs/fizz.jpg')">
+          </div>
+          <div class="carousel-item" style="background-image: url('imgs/keyle.jpg')">
+          </div>
+        </div>
+        <a class="carousel-control-prev" href="#banner" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#banner" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+      <% if(currentUser && currentUser.isAdmin) { %>
+        <h5>You are admin</h5>
+      <% } %>
+      <div class="container mt-5">
+          <div class="row mb-5">
+                <div class="col-md-3">
+                    <h5 class="mb-4">Share Your Trip With Us</h5>
+                    <form action="/trips/new" method="POST">
+                        <div class="form-group">
+                            <label>Name Of Trip</label>
+                            <input class="form-control" type="text" name="trips[name]">
+                        </div>
+                        <div class="form-group">
+                            <label>Location</label>
+                            <input class="form-control" type="text" name="trips[location]">
+                        </div>
+                        <div class="form-group">
+                            <label for="image">Image</label>
+                            <input type="file" id="image" name="image" accept="image/*" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Description</label>
+                            <textarea class="form-control" name="trips[description]" cols="30" rows="10"></textarea>
+                        </div>
+                        <input class="btn btn-outline-success" type="submit" value="Share">
+                        <a class="btn btn-outline-success" href="/trips/new">More</a>
+                    </form>
+                </div>
+                <div class="col-md-9">
+                    <a href="#"><h4>Mới nhất</h4></a>
+                    <div class="row">
+                        <% trip.forEach(function(trip) { %> 
+                            <div class="col-md-6 col-lg-3 mb-4">
+                                <div class="card h-100">
+                                    <img class="card-img-top" src="<%= trip.image[0] %>" alt="<%trip.name%> picture">
+                                    <div class="card-body">
+                                        <h5 class="card-title">
+                                            <a href="#"><%= trip.name %></a>
+                                        </h5>
+                                        <p class="card-text"><%= trip.description.substring(0, 15) %>...</p>
+                                        <a class="btn btn-outline-success" href="trips/<%= trip._id %>">Xem chi tiết</a>
+                                    </div>
+                                </div>
+                            </div>                      
+                        <% }) %>
+                    </div>
+              </div>
+        </div>
+    </div>
+    
+<% include ../partials/footer %>

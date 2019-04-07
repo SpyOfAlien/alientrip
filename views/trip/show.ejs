@@ -1,0 +1,69 @@
+<% include ../partials/header %>
+<!-- Page Content -->
+<div class="container blog">
+  <div class="row">
+    <div class="col-lg-9">
+      <h1 class="mt-4"><%= trip.name%></h1>
+      <small><%= moment(trip.created).fromNow() %></small>
+      <p class="lead">
+        by
+        <a href="/users/<%= trip._author.id %>"><%= trip._author.username %></a>
+      </p>
+      <hr>
+      <img class="img-fluid rounded" src="<%= trip.image[0] %>" alt="">
+      <% if(currentUser && trip._author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin){ %>
+      <a class="btn btn-warning" href="/trips/<%= trip._id %>/edit">Edit</a>
+      <form action="/trips/<%= trip._id %>?_method=DELETE" method="POST" class="delete-form">
+        <button class="btn btn-danger">Delete</button>
+      </form>
+      <% } %>
+      <hr>
+      <p><%= trip.description %></p>
+      <hr>
+      <!-- Comments Form -->
+      <div class="card my-4">
+        <h5 class="card-header">Leave a Comment:</h5>
+        <div class="card-body">
+          <form action="/trips/<%= trip._id %>/comments" method="POST">
+            <div class="form-group">
+              <textarea name="comment[text]" class="form-control" rows="3"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+      </div>
+      <% trip._comment.forEach(function(comment) { %>
+      <div class="media mb-4">
+        <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+        <div class="media-body">
+          <h5 class="mt-0"><%= comment._author.username %> - <small><%= moment(comment.created).fromNow() %></small>
+          </h5>
+          <%= comment.text%>
+        </div>
+      </div>
+      <% }) %>
+    </div>
+    <div class="col-md-3">
+      <div>
+        <% if(currentUser && trip._author.id.equals(currentUser._id)) { %>
+        <form action="/trips/<%= trip._id %>/gallery" method="post" enctype="multipart/form-data">
+          <div class="custom-file mb-3 mt-5">
+            <input class="custom-file-input" id="file-upload" name="image" accept="image/*" required type="file" />
+            <label for="file-upload" class="custom-file-label">
+              Thêm hình ảnh
+            </label>
+          </div>
+          <input type="submit" value="Upload" class="btn btn-success btn-block">
+        </form>
+        <% } else { %>
+        <a href="" class="btn btn-success mt-2 w-100">Location</a>
+        <% } %>
+        <a href="/trips/<%= trip._id %>/gallery" class="btn btn-success mt-2 w-100">View more Image</a>
+      </div>
+      <div class="mt-5">
+        <h4>Related Post</h4>
+      </div>
+    </div>
+  </div>
+</div>
+<% include ../partials/footer %>

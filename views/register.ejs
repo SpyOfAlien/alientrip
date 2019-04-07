@@ -1,0 +1,43 @@
+<% include partials/header %>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-10 col-xl-9 mx-auto">
+      <div class="card card-signin flex-row my-5">
+        <div class="card-img-left d-none d-md-flex">
+        </div>
+        <div class="card-body">
+          <h5 class="card-title text-center">Đăng ký tài khoản</h5>
+          <form class="form-signin" action="/register" method="POST">
+            <div class="form-label-group mb-4">
+              <label for="firstName">First Name</label>
+              <input type="text" id="firstName" class="form-control" name="firstName" placeholder="First Name" required>
+            </div>
+            <div class="form-label-group mb-4">
+              <label for="lastName">Last Name</label>
+              <input type="text" id="lastName" class="form-control" name="lastName" placeholder="Last Name" required>
+            </div>
+            <div class="form-label-group mb-4">
+              <label for="email">Email</label>
+              <input type="text" id="email" class="form-control" name="email" placeholder="example@gmail.com">
+            </div>
+            <div class="form-label-group mb-4">
+              <label for="inputUserame">Username</label>
+              <input type="text" id="inputUserame" class="form-control" name="username" placeholder="Username" required>
+            </div>
+            <div class="form-label-group mb-4">
+              <label for="admin">Password</label>
+              <input type="password" name="password" id="admin" class="form-control" placeholder="Password" required>
+            </div>
+            <div class="form-label-group mb-4">
+              <label for="admin">ADMIN CODE</label>
+              <input type="password" name="admin" id="admin" class="form-control" placeholder="Admin Code">
+            </div>
+            <button class="btn btn-primary btn-block small" type="submit">SignUp</button>
+            <a class="btn btn-danger d-block text-center mt-2 small" href="/login">LogIn</a>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<% include partials/footer %>
